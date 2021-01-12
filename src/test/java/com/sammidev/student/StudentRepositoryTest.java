@@ -60,9 +60,9 @@ public class StudentRepositoryTest {
         underTest.save(student);
 
         // then
-        var optionalStudent1 = underTest.selectCustomerByPhoneNumber(phone);
-        var optionalStudent2 = underTest.selectCustomerByNIM(nim);
-        var optionalStudent3 = underTest.selectCustomerByEmail(email);
+        var optionalStudent1 = underTest.selectStudentByPhoneNumber(phone);
+        var optionalStudent2 = underTest.selectStudentByNIM(nim);
+        var optionalStudent3 = underTest.selectStudentByEmail(email);
 
         assertThat(optionalStudent1).isPresent().hasValueSatisfying(a -> {
             assertThat(a).isEqualToComparingFieldByFieldRecursively(student); });
@@ -82,7 +82,7 @@ public class StudentRepositoryTest {
         var phoneNumber = "+123";
 
         // When
-        var optionalStudent = underTest.selectCustomerByPhoneNumber(phoneNumber);
+        var optionalStudent = underTest.selectStudentByPhoneNumber(phoneNumber);
 
         // Then
         assertThat(optionalStudent).isNotPresent();
@@ -94,7 +94,7 @@ public class StudentRepositoryTest {
         var nim = "123123123";
 
         // When
-        var optionalStudent = underTest.selectCustomerByNIM(nim);
+        var optionalStudent = underTest.selectStudentByNIM(nim);
 
         // Then
         assertThat(optionalStudent).isNotPresent();
@@ -106,7 +106,7 @@ public class StudentRepositoryTest {
         var email = "sammidev@gmail.com";
 
         // When
-        var optionalStudent = underTest.selectCustomerByEmail(email);
+        var optionalStudent = underTest.selectStudentByEmail(email);
 
         // Then
         assertThat(optionalStudent).isNotPresent();
@@ -227,12 +227,12 @@ public class StudentRepositoryTest {
     void deleteStudentSuccessfullEmail() {
 
         underTest.save(student);
-        var select = underTest.selectCustomerByNIM(student.getNim());
+        var select = underTest.selectStudentByNIM(student.getNim());
 
         log.info(String.valueOf(select));
 
         underTest.deleteStudentByEmail("aaaaaaaa@gmail.com");
-        var select2 = underTest.selectCustomerByNIM(student.getNim());
+        var select2 = underTest.selectStudentByNIM(student.getNim());
         assertThat(select2).isNotPresent();
     }
 
@@ -253,7 +253,7 @@ public class StudentRepositoryTest {
 
         underTest.save(student);
         underTest.updateStudentByNIM("sammmi nama baru", nim);
-        var select2 = underTest.selectCustomerByNIM(nim);
+        var select2 = underTest.selectStudentByNIM(nim);
 
         // then
         var optionalStudent = underTest.findById(id);
@@ -284,7 +284,7 @@ public class StudentRepositoryTest {
         underTest.save(student);
 
         underTest.updateNamePhoneEmailByNIM("UPDATE","+6280000011134","UPDATE@gmail.com", nim);
-        var select2 = underTest.selectCustomerByNIM(nim);
+        var select2 = underTest.selectStudentByNIM(nim);
 
         // then
         var optionalStudent = underTest.findById(id);

@@ -38,8 +38,8 @@ public class StudentRegistrationService {
             throw new IllegalStateException("Email " + email + " is not valid");
         }
 
-        Optional<Student> studentOptionalByPhone = studentRepository.selectCustomerByPhoneNumber(phoneNumber);
-        Optional<Student> studentOptionalByEmail = studentRepository.selectCustomerByEmail(email);
+        Optional<Student> studentOptionalByPhone = studentRepository.selectStudentByPhoneNumber(phoneNumber);
+        Optional<Student> studentOptionalByEmail = studentRepository.selectStudentByEmail(email);
 
         if (studentOptionalByPhone.isPresent()) {
             Student student = studentOptionalByPhone.get();
@@ -60,6 +60,9 @@ public class StudentRegistrationService {
         // create ID and NIM
         if(request.getStudent().getId() == null) {
             request.getStudent().setId(UUID.randomUUID());
+        }
+
+        if (request.getStudent().getNim() == null) {
             request.getStudent().setNim(new NIMGenerator().generate());
         }
 

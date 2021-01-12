@@ -12,13 +12,13 @@ import java.util.UUID;
 public interface StudentRepository extends CrudRepository<Student, UUID> {
 
     @Query(value = "select id, name, nim, email, phone from student where phone = :phone", nativeQuery = true)
-    Optional<Student> selectCustomerByPhoneNumber(@Param("phone") String phone);
+    Optional<Student> selectStudentByPhoneNumber(@Param("phone") String phone);
 
     @Query(value = "select id, name, nim, email, phone from student where nim = :nim", nativeQuery = true)
-    Optional<Student> selectCustomerByNIM(@Param("nim") String nim);
+    Optional<Student> selectStudentByNIM(@Param("nim") String nim);
 
     @Query(value = "select id, name, nim, email, phone from student where email = :email", nativeQuery = true)
-    Optional<Student> selectCustomerByEmail(@Param("email") String email);
+    Optional<Student> selectStudentByEmail(@Param("email") String email);
 
     @Modifying
     @Transactional
